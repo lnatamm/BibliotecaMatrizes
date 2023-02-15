@@ -4,6 +4,12 @@ public class Transformations {
 
     private Matrix transformationMatix;
 
+    public Transformations(){
+
+        this.transformationMatix = new Matrix();
+
+    }
+
     public void translate2D(Vector vector, double dx, double dy){
 
         defineTranslation2DMatrix(dx, dy);

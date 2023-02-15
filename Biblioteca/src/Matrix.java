@@ -83,6 +83,98 @@ public class Matrix {
 
     }
 
+    public Vector getLine(int n){
+
+        double[][] elementos = new double[this.linhas][1];
+
+        for(int i = 0; i < 1; i++){
+
+            for(int j = 0; j < this.colunas; j++){
+
+                elementos[j][0] = this.elementos[n][j];
+
+            }
+
+        }
+
+        Vector v = new Vector(this.linhas, elementos);
+
+        return v;
+
+    }
+
+    public Vector getColumm(int n){
+
+        double[][] elementos = new double[this.linhas][1];
+
+        for(int i = 0; i < this.linhas; i++){
+
+            for(int j = 0; j < 1; j++){
+
+                elementos[i][0] = this.elementos[i][n];
+
+            }
+
+        }
+
+        Vector v = new Vector(this.linhas, elementos);
+
+        return v;
+
+    }
+
+    public Vector sumLines(){
+
+        double[][] elementos = new double[this.linhas][1];
+
+        double soma = 0;
+
+        for(int i = 0; i < this.linhas; i++){
+
+            for(int j = 0; j < this.colunas; j++) {
+
+                soma += this.get(i, j);
+
+                elementos[i][0] = soma;
+
+            }
+
+            soma = 0;
+
+        }
+
+        Vector v = new Vector(this.linhas, elementos);
+
+        return v;
+
+    }
+
+    public Vector sumColumms(){
+
+        double[][] elementos = new double[this.linhas][1];
+
+        double soma = 0;
+
+        for(int i = 0; i < this.linhas; i++){
+
+            for(int j = 0; j < this.colunas; j++) {
+
+                soma += this.get(j, i);
+
+                elementos[i][0] = soma;
+
+            }
+
+            soma = 0;
+
+        }
+
+        Vector v = new Vector(this.linhas, elementos);
+
+        return v;
+
+    }
+
     public void show(){
 
         int i, j;
@@ -98,6 +190,26 @@ public class Matrix {
             }
 
             System.out.printf("%.1f]\n", this.elementos[i][j]);
+
+        }
+
+    }
+
+    public void showNDecimals(int n){
+
+        int i, j;
+
+        for(i = 0; i < this.linhas; i++){
+
+            System.out.print("[");
+
+            for(j = 0; j < this.colunas - 1; j++){
+
+                System.out.printf("%." + n + "f ", this.elementos[i][j]);
+
+            }
+
+            System.out.printf("%." + n + "f]\n", this.elementos[i][j]);
 
         }
 

@@ -1,10 +1,11 @@
 import java.util.*;
-
 public class Operador {
 
     private LinearAlgebra op = new LinearAlgebra();
 
     private Transformations t = new Transformations();
+
+    private PageRank pr = new PageRank();
 
     private String operacao;
 
@@ -26,19 +27,19 @@ public class Operador {
 
     }
 
-    public void pedido(String operacao){
+    public void pedido(String operacao) throws Exception{
 
         this.operacao = operacao;
 
         Scanner sc = new Scanner(System.in);
 
-        if(this.operacao.equals("transpose") || this.operacao.equals("Transpose")){
+        if (this.operacao.equals("transpose") || this.operacao.equals("Transpose")) {
 
             System.out.println("Você deseja transpor uma Matriz ou um Vetor?");
 
             String tipo = sc.next();
 
-            if(tipo.equals("Matriz") || tipo.equals("matriz")){
+            if (tipo.equals("Matriz") || tipo.equals("matriz")) {
 
                 System.out.print("Quantidade de Linhas: ");
 
@@ -52,9 +53,9 @@ public class Operador {
 
                 double[][] elementos = new double[linhas][colunas];
 
-                for(int i = 0; i < linhas; i++){
+                for (int i = 0; i < linhas; i++) {
 
-                    for(int j = 0; j < colunas; j++){
+                    for (int j = 0; j < colunas; j++) {
 
                         elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -68,7 +69,7 @@ public class Operador {
 
             }
 
-            if(tipo.equals("Vetor") || tipo.equals("vetor")){
+            if (tipo.equals("Vetor") || tipo.equals("vetor")) {
 
                 System.out.print("Dimensão do Vetor: ");
 
@@ -78,9 +79,9 @@ public class Operador {
 
                 double[][] elementos = new double[dim][1];
 
-                for(int i = 0; i < dim; i++){
+                for (int i = 0; i < dim; i++) {
 
-                    for(int j = 0; j < 1; j++){
+                    for (int j = 0; j < 1; j++) {
 
                         elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -96,21 +97,21 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("sum") || this.operacao.equals("Sum") || this.operacao.equals("times") || this.operacao.equals("Times") || this.operacao.equals("dot") || this.operacao.equals("Dot")){
+        else if (this.operacao.equals("sum") || this.operacao.equals("Sum") || this.operacao.equals("times") || this.operacao.equals("Times") || this.operacao.equals("dot") || this.operacao.equals("Dot")) {
 
-            if(this.operacao.equals("sum") || this.operacao.equals("Sum")){
+            if (this.operacao.equals("sum") || this.operacao.equals("Sum")) {
 
                 System.out.println("Qual o primeiro elemento a ser somado?");
 
             }
 
-            if(this.operacao.equals("times") || this.operacao.equals("Times")){
+            else if (this.operacao.equals("times") || this.operacao.equals("Times")) {
 
                 System.out.println("Qual o primeiro elemento a ser multiplicado(elemento a elemento)");
 
             }
 
-            if(this.operacao.equals("dot") || this.operacao.equals("Dot")){
+            else if (this.operacao.equals("dot") || this.operacao.equals("Dot")) {
 
                 System.out.println("Qual o primeiro elemento a ser multiplicado?");
 
@@ -118,7 +119,7 @@ public class Operador {
 
             String tipo1 = sc.next();
 
-            if((this.operacao.equals("times") && tipo1.equals("Escalar")) || (this.operacao.equals("Times") && tipo1.equals("Escalar")) || (this.operacao.equals("times") && tipo1.equals("escalar")) || (this.operacao.equals("Times") && tipo1.equals("escalar"))){
+            if ((this.operacao.equals("times") && tipo1.equals("Escalar")) || (this.operacao.equals("Times") && tipo1.equals("Escalar")) || (this.operacao.equals("times") && tipo1.equals("escalar")) || (this.operacao.equals("Times") && tipo1.equals("escalar"))) {
 
                 System.out.println("Escalar:");
 
@@ -128,7 +129,7 @@ public class Operador {
 
                 String tipo2 = sc.next();
 
-                if(tipo2.equals("Matriz") || tipo2.equals("matriz")){
+                if (tipo2.equals("Matriz") || tipo2.equals("matriz")) {
 
                     System.out.print("Quantidade de Linhas: ");
 
@@ -142,9 +143,9 @@ public class Operador {
 
                     double[][] elementos2 = new double[linhas2][colunas2];
 
-                    for(int i = 0; i < linhas2; i++){
+                    for (int i = 0; i < linhas2; i++) {
 
-                        for(int j = 0; j < colunas2; j++){
+                        for (int j = 0; j < colunas2; j++) {
 
                             elementos2[i][j] = Double.parseDouble(sc.next());
 
@@ -158,7 +159,7 @@ public class Operador {
 
                 }
 
-                if(tipo2.equals("Vetor") || tipo2.equals("vetor")){
+                else if (tipo2.equals("Vetor") || tipo2.equals("vetor")) {
 
                     System.out.print("Dimensão do Vetor: ");
 
@@ -168,9 +169,9 @@ public class Operador {
 
                     double[][] elementos2 = new double[dim2][1];
 
-                    for(int i = 0; i < dim2; i++){
+                    for (int i = 0; i < dim2; i++) {
 
-                        for(int j = 0; j < 1; j++){
+                        for (int j = 0; j < 1; j++) {
 
                             elementos2[i][j] = Double.parseDouble(sc.next());
 
@@ -185,8 +186,6 @@ public class Operador {
                 }
 
             }
-
-
 
             if (tipo1.equals("Matriz") || tipo1.equals("matriz")) {
 
@@ -214,19 +213,19 @@ public class Operador {
 
                 Matrix matrix1 = new Matrix(linhas1, colunas1, elementos1);
 
-                if(this.operacao.equals("sum") || this.operacao.equals("Sum")){
+                if (this.operacao.equals("sum") || this.operacao.equals("Sum")) {
 
                     System.out.println("Qual o segundo elemento a ser somado?");
 
                 }
 
-                if(this.operacao.equals("times") || this.operacao.equals("Times")){
+                if (this.operacao.equals("times") || this.operacao.equals("Times")) {
 
                     System.out.println("Qual o segundo elemento a ser multiplicado(elemento a elemento)");
 
                 }
 
-                if(this.operacao.equals("dot") || this.operacao.equals("Dot")){
+                if (this.operacao.equals("dot") || this.operacao.equals("Dot")) {
 
                     System.out.println("Qual o segundo elemento a ser multiplicado?");
 
@@ -264,7 +263,7 @@ public class Operador {
 
                 }
 
-                if (tipo2.equals("Vetor") || tipo2.equals("vetor")) {
+                else if (tipo2.equals("Vetor") || tipo2.equals("vetor")) {
 
                     System.out.print("Dimensão do Vetor: ");
 
@@ -292,7 +291,7 @@ public class Operador {
 
             }
 
-            if (tipo1.equals("Vetor") || tipo1.equals("vetor")) {
+            else if (tipo1.equals("Vetor") || tipo1.equals("vetor")) {
 
                 System.out.print("Dimensão do Vetor: ");
 
@@ -314,19 +313,19 @@ public class Operador {
 
                 Vector vector1 = new Vector(dim1, elementos1);
 
-                if(this.operacao.equals("sum") || this.operacao.equals("Sum")){
+                if (this.operacao.equals("sum") || this.operacao.equals("Sum")) {
 
                     System.out.println("Qual o segundo elemento a ser somado?");
 
                 }
 
-                if(this.operacao.equals("times") || this.operacao.equals("Times")){
+                if (this.operacao.equals("times") || this.operacao.equals("Times")) {
 
                     System.out.println("Qual o segundo elemento a ser multiplicado(elemento a elemento)");
 
                 }
 
-                if(this.operacao.equals("dot") || this.operacao.equals("Dot")){
+                if (this.operacao.equals("dot") || this.operacao.equals("Dot")) {
 
                     System.out.println("Qual o segundo elemento a ser multiplicado?");
 
@@ -364,7 +363,7 @@ public class Operador {
 
                 }
 
-                if (tipo2.equals("Vetor") || tipo2.equals("vetor")) {
+                else if (tipo2.equals("Vetor") || tipo2.equals("vetor")) {
 
                     System.out.print("Dimensão do Vetor: ");
 
@@ -392,18 +391,17 @@ public class Operador {
 
             }
 
-
         }
 
-        if(this.operacao.equals("gauss") || this.operacao.equals("Gauss") || this.operacao.equals("solve") || this.operacao.equals("Solve")){
+        else if (this.operacao.equals("gauss") || this.operacao.equals("Gauss") || this.operacao.equals("solve") || this.operacao.equals("Solve")) {
 
-            if(this.operacao.equals("gauss") || this.operacao.equals("Gauss")){
+            if (this.operacao.equals("gauss") || this.operacao.equals("Gauss")) {
 
                 System.out.println("Digite a matriz a sofrer redução gaussiana:");
 
             }
 
-            if(this.operacao.equals("solve") || this.operacao.equals("Solve")){
+            if (this.operacao.equals("solve") || this.operacao.equals("Solve")) {
 
                 System.out.println("Digite a matriz a ser resolvida:");
 
@@ -421,9 +419,9 @@ public class Operador {
 
             double[][] elementos = new double[linhas][colunas];
 
-            for(int i = 0; i < linhas; i++){
+            for (int i = 0; i < linhas; i++) {
 
-                for(int j = 0; j < colunas; j++){
+                for (int j = 0; j < colunas; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -438,15 +436,15 @@ public class Operador {
         }
 
 
-        if(this.operacao.equals("translate2D") || this.operacao.equals("Translate2D")){
+        else if (this.operacao.equals("translate2D") || this.operacao.equals("Translate2D")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[2][1];
 
-            for(int i = 0; i < 2; i++){
+            for (int i = 0; i < 2; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -468,15 +466,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("translate3D") || this.operacao.equals("Translate3D")){
+        else if (this.operacao.equals("translate3D") || this.operacao.equals("Translate3D")) {
 
             System.out.println("Digite os elementos: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -502,15 +500,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("rotate2D") || this.operacao.equals("Rotate2D")){
+        else if (this.operacao.equals("rotate2D") || this.operacao.equals("Rotate2D")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[2][1];
 
-            for(int i = 0; i < 2; i++){
+            for (int i = 0; i < 2; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -528,15 +526,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("rotate3DX") || this.operacao.equals("Rotate3DX")){
+        else if (this.operacao.equals("rotate3DX") || this.operacao.equals("Rotate3DX")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -554,15 +552,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("rotate3DY") || this.operacao.equals("Rotate3DY")){
+        else if (this.operacao.equals("rotate3DY") || this.operacao.equals("Rotate3DY")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -580,15 +578,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("rotate3DZ") || this.operacao.equals("Rotate3DZ")){
+        else if (this.operacao.equals("rotate3DZ") || this.operacao.equals("Rotate3DZ")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -606,15 +604,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("reflect2DX") || this.operacao.equals("Reflect2DX")){
+        else if (this.operacao.equals("reflect2DX") || this.operacao.equals("Reflect2DX")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[2][1];
 
-            for(int i = 0; i < 2; i++){
+            for (int i = 0; i < 2; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -628,15 +626,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("reflect2DY") || this.operacao.equals("Reflect2DY")){
+        else if (this.operacao.equals("reflect2DY") || this.operacao.equals("Reflect2DY")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[2][1];
 
-            for(int i = 0; i < 2; i++){
+            for (int i = 0; i < 2; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -650,15 +648,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("reflect3DX") || this.operacao.equals("Reflect3DX")){
+        else if (this.operacao.equals("reflect3DX") || this.operacao.equals("Reflect3DX")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -672,15 +670,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("reflect3DY") || this.operacao.equals("Reflect3DY")){
+        else if (this.operacao.equals("reflect3DY") || this.operacao.equals("Reflect3DY")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -694,15 +692,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("reflect3DZ") || this.operacao.equals("Reflect3DZ")){
+        else if (this.operacao.equals("reflect3DZ") || this.operacao.equals("Reflect3DZ")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -716,15 +714,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("project2DX") || this.operacao.equals("Project2DX")){
+        else if (this.operacao.equals("project2DX") || this.operacao.equals("Project2DX")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[2][1];
 
-            for(int i = 0; i < 2; i++){
+            for (int i = 0; i < 2; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -738,15 +736,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("project2DY") || this.operacao.equals("Project2DY")){
+        else if (this.operacao.equals("project2DY") || this.operacao.equals("Project2DY")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[2][1];
 
-            for(int i = 0; i < 2; i++){
+            for (int i = 0; i < 2; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -760,15 +758,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("project3DX") || this.operacao.equals("Project3DX")){
+        else if (this.operacao.equals("project3DX") || this.operacao.equals("Project3DX")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -782,15 +780,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("project3DY") || this.operacao.equals("Project3DY")){
+        else if (this.operacao.equals("project3DY") || this.operacao.equals("Project3DY")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -804,15 +802,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("project3DZ") || this.operacao.equals("Project3DZ")){
+        else if (this.operacao.equals("project3DZ") || this.operacao.equals("Project3DZ")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[3][1];
 
-            for(int i = 0; i < 3; i++){
+            for (int i = 0; i < 3; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -826,15 +824,15 @@ public class Operador {
 
         }
 
-        if(this.operacao.equals("shear") || this.operacao.equals("Shear")){
+        else if (this.operacao.equals("shear") || this.operacao.equals("Shear")) {
 
             System.out.println("Insira os elementos do Vetor: ");
 
             double[][] elementos = new double[2][1];
 
-            for(int i = 0; i < 2; i++){
+            for (int i = 0; i < 2; i++) {
 
-                for(int j = 0; j < 1; j++){
+                for (int j = 0; j < 1; j++) {
 
                     elementos[i][j] = Double.parseDouble(sc.next());
 
@@ -853,6 +851,87 @@ public class Operador {
             double ky = Double.parseDouble(sc.next());
 
             operacao(this.operacao, vector, kx, ky);
+
+        }
+
+        else if (this.operacao.equals("cavectors") || this.operacao.equals("Cavectors") || this.operacao.equals("cAvectors") || this.operacao.equals("caVectors") || this.operacao.equals("CaVectors") || this.operacao.equals("CAVectors") || this.operacao.equals("CAVECTORS") || this.operacao.equals("autorityvector") || this.operacao.equals("Autorityvector") || this.operacao.equals("autorityVector") || this.operacao.equals("AutorityVector") || this.operacao.equals("AUTORITYVECTOR") || this.operacao.equals("centervector") || this.operacao.equals("Centervector") || this.operacao.equals("centerVector") || this.operacao.equals("CenterVector") || this.operacao.equals("CENTERVECTOR")) {
+
+            System.out.println("Qual a dimensão da matriz adjacente?");
+
+            int dimensao = Integer.parseInt(sc.next());
+
+            System.out.println("Insira os elementos:");
+
+            double[][] elementos = new double[dimensao][dimensao];
+
+            for (int i = 0; i < dimensao; i++) {
+
+                for (int j = 0; j < dimensao; j++) {
+
+                    elementos[i][j] = Double.parseDouble(sc.next());
+
+                }
+
+            }
+
+            Matrix adjacentMatrix = new Matrix(dimensao, dimensao, elementos);
+
+            this.pr.setAdjacentMatrix(adjacentMatrix);
+
+            if(this.operacao.equals("cavectors") || this.operacao.equals("Cavectors") || this.operacao.equals("cAvectors") || this.operacao.equals("caVectors") || this.operacao.equals("CaVectors") || this.operacao.equals("CAVectors") || this.operacao.equals("CAVECTORS")){
+
+                System.out.println("Qual An e Hn você deseja?");
+
+                int n = Integer.parseInt(sc.next());
+
+                System.out.println();
+
+                System.out.println("A" + n + ":");
+
+                pr.getAn(n).showNDecimals(5);
+
+                System.out.println();
+
+                System.out.println("H" + n + ":");
+
+                pr.getCn(n).showNDecimals(5);
+
+                System.out.println();
+
+            }
+
+            if(this.operacao.equals("autorityvector") || this.operacao.equals("Autorityvector") || this.operacao.equals("autorityVector") || this.operacao.equals("AutorityVector") || this.operacao.equals("AUTORITYVECTOR")) {
+
+                System.out.println("Qual An você deseja?");
+
+                int n = Integer.parseInt(sc.next());
+
+                System.out.println();
+
+                System.out.println("A" + n + ":");
+
+                pr.getAn(n).showNDecimals(5);
+            }
+
+            if(this.operacao.equals("centervector") || this.operacao.equals("Centervector") || this.operacao.equals("centerVector") || this.operacao.equals("CenterVector")){
+
+                System.out.println("Qual Hn você deseja?");
+
+                int n = Integer.parseInt(sc.next());
+
+                System.out.println();
+
+                System.out.println("H" + n + ":");
+
+                pr.getCn(n).showNDecimals(5);
+
+            }
+
+        }
+
+        else {
+
+            throw new Exception();
 
         }
 
